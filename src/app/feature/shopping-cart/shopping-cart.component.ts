@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
-import { Component, effect, inject } from '@angular/core';
+import { Component, computed, effect, inject } from '@angular/core';
+import { sharedMessage } from '../../shared/state/global-state';
 import { ShoppingCartService } from './services/shopping-cart.service';
-import { testin123 as testingExternalSignal } from './testing';
 
 @Component({
   selector: 'app-shopping-cart',
@@ -13,12 +13,12 @@ export class ShoppingCartComponent {
   cartService = inject(ShoppingCartService);
   // Variables para el carrito y el precio total
   cartItems$ = this.cartService.getCartItems$();
-  // totalPrice = this.cartService.getTotalPrice();
+  totalPrice = computed(() => this.cartService.getTotalPrice());
   cartItemCount = this.cartService.cartItemCount;
 
   constructor() {
     effect(() => {
-      console.log('test --->', testingExternalSignal());
+      console.log('test --->', sharedMessage());
     });
   }
 
@@ -28,7 +28,7 @@ export class ShoppingCartComponent {
   addProduct(productId: number) {
     this.cartService.addProductToCart(productId);
 
-    testingExternalSignal.set('Cambio');
+    sharedMessage.set('Cambio');
   }
 
   // Método para eliminar un producto del carrito

@@ -14,8 +14,8 @@ export class IntroComponent implements OnInit {
   public changeColor: boolean = false;
   private readonly initialCounter = 1;
 
-  public counter = signal(0); // Se inicializa el signal con un valor
-  public doubled = computed(() => this.counter() * 2);
+  public counter = signal<number>(0); // Se inicializa el signal con un valor
+  public doubled = computed<number>(() => this.counter() * 2);
 
   public counter$ = toObservable(this.counter);
 
