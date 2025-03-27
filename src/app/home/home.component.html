@@ -1,0 +1,15 @@
+<div>
+  <p>Ingresa un valor para el Username</p>
+  <input
+    #inputTest
+    (input)="handleInputChange(inputTest.value)"
+    [value]="userNameData().value"
+  />
+
+  <p>{{ userNameData().label }}</p>
+  <p>Valor signal del padre: {{ componentUserName() }}</p>
+  <hr />
+
+  <br />
+  <app-child-home></app-child-home>
+</div>
