@@ -1,0 +1,28 @@
+<div class="cart">
+  <h2>Carrito de Compras</h2>
+
+  <!-- <p>Test: {{ cartService.getCartItems() | json }}</p> -->
+  <!-- <p>Test2: {{ cartItems | json }}</p> -->
+
+  <ng-container *ngIf="cartItems$ | async as cartItems">
+    <div *ngIf="cartItems.length === 0">El carrito está vacío.</div>
+
+    <ul *ngIf="cartItems.length > 0">
+      <li *ngFor="let item of cartItems; let i = index">
+        {{ item.name }} - ${{ item.price }}
+        <button (click)="removeProduct(i)">Eliminar</button>
+      </li>
+    </ul>
+
+    <div *ngIf="cartItems.length > 0">
+      <p>Total de productos: {{ cartItemCount() }}</p>
+      <p>Total a pagar: ${{ cartService.totalPrice() }}</p>
+    </div>
+  </ng-container>
+
+  <div>
+    <button (click)="addProduct(1)">Agregar Producto 1</button>
+    <button (click)="addProduct(2)">Agregar Producto 2</button>
+    <button (click)="addProduct(3)">Agregar Producto 3</button>
+  </div>
+</div>

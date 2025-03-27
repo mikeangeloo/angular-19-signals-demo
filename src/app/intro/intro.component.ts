@@ -1,15 +1,16 @@
 import { CommonModule } from '@angular/common';
-import { Component, computed, effect, signal } from '@angular/core';
+import { Component, computed, effect, OnInit, signal } from '@angular/core';
 import { toObservable, toSignal } from '@angular/core/rxjs-interop';
+import { RouterLink } from '@angular/router';
 import { interval, take } from 'rxjs';
 
 @Component({
   selector: 'app-intro',
-  imports: [CommonModule],
+  imports: [CommonModule, RouterLink],
   templateUrl: './intro.component.html',
   styleUrl: './intro.component.scss',
 })
-export class IntroComponent {
+export class IntroComponent implements OnInit {
   public changeColor: boolean = false;
   private readonly initialCounter = 1;
 
@@ -34,6 +35,8 @@ export class IntroComponent {
       }
     });
   }
+
+  ngOnInit(): void {}
 
   public incrementCounter(): void {
     this.counter.set(this.counter() + 1);
