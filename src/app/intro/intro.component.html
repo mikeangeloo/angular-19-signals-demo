@@ -1,0 +1,81 @@
+<div>
+  <h1>1. Creación y Actualización de un Signal</h1>
+  <p>¿Qué es un Signal?</p>
+  <p>
+    Un <b>Signal</b> es una variable reactiva en Angular que almacena y gestiona
+    valores de estado de manera eficiente, permitiendo actualizaciones reactivas
+    sin necesidad de suscripciones explícitas.
+  </p>
+  <p>Arquitectura</p>
+  <ul>
+    <li>Encapsula estado local y global de forma reactiva</li>
+    <li>Evita la necesidad de Subjects o BehaviorSubjects en muchos casos</li>
+    <li>Se puede usar en componentes, servicios o módulos compartidos</li>
+  </ul>
+  <p>Características Clave de los Signals</p>
+  <ul>
+    <li>Reactivos → Se actualizan automáticamente cuando su valor cambia</li>
+    <li>Síncronos → No necesitan async o subscribe()</li>
+    <li>Inmutables → Solo se actualizan con set() o update()</li>
+    <li>
+      Eficientes → No disparan cambios innecesarios, optimizando rendimiento
+    </li>
+  </ul>
+  <br />
+  <b>Ejemplo:</b>
+  <p>Counter: {{ counter() }}</p>
+  <div class="buttons-container">
+    <button (click)="incrementCounter()">Cambiar contador</button>
+    <button (click)="resetCounter()">Reiniciar contador</button>
+  </div>
+</div>
+<hr />
+<div>
+  <h1>2. Uso de computed() y effect()</h1>
+  <p><b>computed():</b> Valores Derivados</p>
+  <p>
+    Sirve para calcular valores de manera automática cada vez que un Signal
+    dependiente cambia.
+  </p>
+  <p>¿Cuándo usar computed()?</p>
+  <ul>
+    <li>Para valores calculados que dependen de uno o más Signals</li>
+    <li>Evita cálculos innecesarios y mejora el rendimiento</li>
+  </ul>
+  <br />
+  <b>Ejemplo:</b>
+  <p>Doubled: {{ doubled() }}</p>
+
+  <p><b>effect():</b> Reacciones Automáticas</p>
+  <p>
+    Se usa para ejecutar efectos secundarios cuando un Signal cambia (por
+    ejemplo, llamadas a APIs, logs, actualizaciones en el DOM).
+  </p>
+  <p>¿Cuándo usar effect()?</p>
+  <ul>
+    <li>Para ejecutar código en respuesta a cambios en Signals</li>
+    <li>Ideal para eventos, sincronización con el DOM y peticiones HTTP</li>
+  </ul>
+  <b>Ejemplo:</b>
+  <p [class.change-color]="changeColor">
+    Cambiando de color al ser mayor que 10
+  </p>
+</div>
+<hr />
+<div>
+  <h1>3. Interoperabilidad con RxJS</h1>
+  <p>Signals y RxJS pueden trabajar juntos utilizando conversión mutua:</p>
+  <b>De Signal a Observable</b>
+  <p>Se convierte un Signal en un Observable usando computed() o effect():</p>
+  <b>Ejemplo:</b>
+  <p>Valor del observable: {{ counter$ | async }}</p>
+  <b>De Observable a Signal</b>
+  <p>Convierte un Observable en un Signal reactivo:</p>
+  <b>Ejemplo:</b>
+  <p>Valor del signal timerSignal: {{ timerSignal() }}</p>
+  <b>¿Cuándo integrar con RxJS?</b>
+  <ul>
+    <li>Cuando trabajamos con flujos de datos asíncronos</li>
+    <li>Para integrar Signals con HttpClient, interval(), WebSockets, etc.</li>
+  </ul>
+</div>
